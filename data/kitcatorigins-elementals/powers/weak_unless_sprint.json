@@ -1,0 +1,60 @@
+{
+	"name":"Can't Stop Won't Stop",
+	"description":"You cannot reach your full strength unless you have been sprinting for 5 seconds. Also, you slowly regenerate health while sprinting.",
+	"type":"origins:multiple",
+	"timer":{
+		"type":"origins:resource",
+		"min":0,
+		"max":100,
+		"hud_render":{
+			"should_render":true,
+			"bar_index":20,
+			"sprite_location":"origins:textures/gui/community/huang/resource_bar_01.png"
+		}
+	},
+	"weakness":{
+		"type":"origins:modify_damage_dealt",
+		"modifier":{
+			"operation":"addition",
+			"value":-4
+		},
+		"condition":{
+			"type":"origins:resource",
+			"resource":"*:*_timer",
+			"comparison":"<",
+			"compare_to":100
+		}
+	},
+	"while":{
+		"type":"origins:action_over_time",
+		"interval":1,
+		"entity_action":{
+			"type":"origins:change_resource",
+			"resource":"*:*_timer",
+			"change":1
+		},
+		"falling_action":{
+			"type":"origins:change_resource",
+			"resource":"*:*_timer",
+			"change":0,
+			"operation":"set"
+		},
+		"condition":{
+			"type": "origins:sprinting"
+		}
+	},
+	"regen":{
+		"type":"origins:action_over_time",
+		"interval":30,
+		"entity_action":{
+			"type":"origins:heal",
+			"amount":1
+		},
+		"condition":{
+			"type":"origins:resource",
+			"resource":"*:*_timer",
+			"comparison":">=",
+			"compare_to":100
+		}
+	}
+}

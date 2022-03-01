@@ -1,0 +1,52 @@
+{
+	"name":"Lightning Dash",
+	"description":"Lose corporeality for an instant and dash forward 5 blocks. Due to your physique it is rather easy to get stuck in the ground and you wont be able to dash while suffocating. You leave a thunderbolt where you originally were",
+	"type":"origins:active_self",
+	"cooldown":400,
+	"key":{"key": "key.origins.secondary_active"},
+	"hud_render":{
+		"should_render":true,
+		"bar_index":13,
+		"sprite_location":"origins:textures/gui/community/spiderkolo/resource_bar_01.png"
+	},
+	"entity_action":{
+		"type":"origins:and",
+		"actions":[
+			{
+				"type": "origins:spawn_entity",
+				"entity_type": "minecraft:lightning_bolt"
+			},
+			{
+				"type":"origins:raycast",
+				"distance":5,
+				"block":false,
+				"entity":false,
+				"command_along_ray":"particle dust 1.000 0.918 0.369 1 ~ ~ ~ 0.1 0.1 0.1 5 5 normal",
+				"command_step":0.5
+			},
+			{
+				"type":"origins:execute_command",
+				"command":"tp @s ^ ^ ^5"
+			}
+		]
+	},
+	"condition": {
+		"type": "origins:in_block",
+		"block_condition": {
+			"type": "origins:or",
+			"inverted":true,
+			"conditions": [
+				{
+					"type": "origins:movement_blocking"
+				},
+				{
+					"type": "origins:offset",
+					"condition": {
+						"type": "origins:movement_blocking"
+					},
+					"y": 1
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,109 @@
+{
+	"name":"Speed Gear",
+	"description":"By pressing your primary you can swap between various speeds.",
+	"type":"origins:multiple",
+	"state":{
+		"type":"origins:resource",
+		"min":0,
+		"max":4,
+		"hud_render":{
+			"should_render":true,
+			"condition":{
+				"type":"origins:resource",
+				"resource":"*:*_timer",
+				"comparison":"!=",
+				"compare_to":5
+			},
+			"bar_index":2
+		},
+		"max_action":{
+			"type":"origins:change_resource",
+			"resource":"*:*_state",
+			"change":0,
+			"operation":"set"
+		}
+	},
+	"timer":{
+		"type":"origins:resource",
+		"min":0,
+		"max":5,
+		"hud_render":{
+			"should_render":false
+		}
+	},
+	"while":{
+		"type":"origins:action_over_time",
+		"interval":20,
+		"entity_action":{
+			"type":"origins:change_resource",
+			"resource":"*:*_timer",
+			"change":1
+		}
+	},
+	"onpress":{
+		"type":"origins:active_self",
+		"key":{"key": "key.origins.primary_active"},
+		"cooldown":0,
+		"entity_action":{
+			"type":"origins:and",
+			"actions":[
+				{
+					"type":"origins:change_resource",
+					"resource":"*:*_state",
+					"change":1
+				},
+				{
+					"type":"origins:change_resource",
+					"resource":"*:*_timer",
+					"change":0,
+					"operation":"set"
+				}
+			]
+		}
+	},
+	"speed_1":{
+		"type": "origins:conditioned_attribute",
+		"modifier": {
+			"attribute": "minecraft:generic.movement_speed",
+			"operation": "multiply_base",
+			"value": 0.4
+		},
+		"tick_rate": 10,
+		"condition": {
+			"type": "origins:resource",
+			"resource":"*:*_state",
+			"comparison":"==",
+			"compare_to":1
+		}
+	},
+	"speed_2":{
+		"type": "origins:conditioned_attribute",
+		"modifier": {
+			"attribute": "minecraft:generic.movement_speed",
+			"operation": "multiply_base",
+			"value": 0.8
+		},
+		"tick_rate": 10,
+		"condition": {
+			"type": "origins:resource",
+			"resource":"*:*_state",
+			"comparison":"==",
+			"compare_to":2
+		}
+	},
+	"speed_3":{
+		"type": "origins:conditioned_attribute",
+		"modifier": {
+			"attribute": "minecraft:generic.movement_speed",
+			"operation": "multiply_base",
+			"value": 1.6
+		},
+		"tick_rate": 10,
+		"condition": {
+			"type": "origins:resource",
+			"resource":"*:*_state",
+			"comparison":"==",
+			"compare_to":3
+		}
+	}
+}

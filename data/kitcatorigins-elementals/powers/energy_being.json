@@ -1,0 +1,21 @@
+{
+	"name":"Energy Being",
+	"description":"As a being of pure energy, you have no need for food. Not like you could eat it anyways. You also don't regenerate naturally.",
+	"type":"origins:multiple",
+	"negate":{
+		"type":"origins:modify_exhaustion",
+		"modifier":{
+			"operation": "multiply_base",
+        	"value": -1
+		}
+	},
+	"prevent":{
+		"type": "origins:prevent_item_use",
+		"item_condition": {
+			"type": "origins:food"
+		}
+	},
+	"regen":{
+		"type": "origins:disable_regen"
+	}
+}

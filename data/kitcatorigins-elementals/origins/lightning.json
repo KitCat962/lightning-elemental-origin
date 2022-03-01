@@ -1,0 +1,17 @@
+{
+	"name":"Lightning Elemental",
+	"description":"A being of pure lightning energy.",
+	"icon":"minecraft:lightning_rod",
+	"impact":2,
+	"powers":[
+		"kitcatorigins-elementals:delayed_water_damage",
+		"kitcatorigins-elementals:energy_being",
+		"kitcatorigins-elementals:energy_yellow",
+		"kitcatorigins-elementals:health_16",
+		"kitcatorigins-elementals:lightning_dash",
+		"kitcatorigins-elementals:metal_weakness",
+		"kitcatorigins-elementals:speed_gear",
+		"kitcatorigins-elementals:weak_unless_sprint",
+		"kitcatorigins-elementals:weildnt"
+	]
+}

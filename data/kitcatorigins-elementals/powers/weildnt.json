@@ -1,0 +1,11 @@
+{
+	"name":"Weildn't",
+	"description":"You cannot weild bows, crossbows, shields, and you cannot throw tridents.",
+	"type": "origins:prevent_item_use",
+    "item_condition": {
+		"type": "origins:ingredient",
+		"ingredient": {
+			"tag": "kitcatorigins-elementals:nouse"
+		}
+	}
+}

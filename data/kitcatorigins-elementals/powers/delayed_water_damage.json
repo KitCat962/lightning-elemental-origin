@@ -1,0 +1,60 @@
+{
+	"name": "I dont have a good name for this. You come up with one.",
+	"description": "You take damage while in water, but only after a delay.",
+	"type": "origins:multiple",
+	"hydrophobia": {
+		"type": "origins:damage_over_time",
+		"interval": 20,
+		"onset_delay": 1,
+		"damage": 2,
+		"damage_easy": 1,
+		"damage_source": {
+			"name": "hurt_by_water",
+			"unblockable": true,
+			"bypasses_armor": true
+		},
+		"protection_enchantment": "origins:water_protection",
+		"protection_effectiveness": 1.0,
+		"condition": {
+			"type":"origins:resource",
+			"resource":"*:*_timer",
+			"comparison":">=",
+			"compare_to":5
+		}
+	},
+	"timer":{
+		"type":"origins:resource",
+		"min":0,
+		"max":5,
+		"hud_render":{"should_render":false}
+	},
+	"while":{
+		"type":"origins:action_over_time",
+		"interval":20,
+		"condition":{
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:water",
+					"comparison": ">",
+					"compare_to": 0.0
+				},
+				{
+					"type": "origins:in_rain"
+				}
+			]
+		},
+		"entity_action":{
+			"type":"origins:change_resource",
+			"resource":"*:*_timer",
+			"change":1
+		},
+		"falling_action":{
+			"type":"origins:change_resource",
+			"resource":"*:*_timer",
+			"change":0,
+			"operation":"set"
+		}
+	}
+}

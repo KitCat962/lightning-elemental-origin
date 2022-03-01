@@ -1,0 +1,9 @@
+{
+	"name":"Lightning Element",
+	"description":"You have a yellow tint and are slightly translucent.",
+	"type": "origins:model_color",
+    "red": 0.933,
+    "green": 1,
+	"blue":0,
+    "alpha": 0.7
+}

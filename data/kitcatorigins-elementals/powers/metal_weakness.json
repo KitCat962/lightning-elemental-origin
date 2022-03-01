@@ -1,0 +1,22 @@
+{
+	"name":"Conductive",
+	"description":"Your being is greatly attracted to metal. Whenever you are hit, large portions of your \"flesh\" are torn off with it.",
+	"type":"origins:modify_damage_taken",
+	"damage_condition": {
+        "type": "origins:attacker",
+        "entity_condition": {
+            "type": "origins:equipped_item",
+            "equipment_slot": "mainhand",
+            "item_condition": {
+				"type":"origins:ingredient",
+				"ingredient":{
+					"tag":"kitcatorigins-elementals:lightning_extra_damage"
+				}
+			}
+		}
+	},
+	"modifier":{
+		"operation":"multiply_base",
+		"value":3
+	}
+}
