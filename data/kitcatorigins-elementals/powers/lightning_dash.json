@@ -1,52 +1,102 @@
 {
-	"name":"Lightning Dash",
-	"description":"Lose corporeality for an instant and dash forward 5 blocks. Due to your physique it is rather easy to get stuck in the ground and you wont be able to dash while suffocating. You leave a thunderbolt where you originally were",
-	"type":"origins:active_self",
-	"cooldown":400,
-	"key":{"key": "key.origins.secondary_active"},
-	"hud_render":{
-		"should_render":true,
-		"bar_index":13,
-		"sprite_location":"origins:textures/gui/community/spiderkolo/resource_bar_01.png"
-	},
-	"entity_action":{
-		"type":"origins:and",
-		"actions":[
-			{
-				"type": "origins:spawn_entity",
-				"entity_type": "minecraft:lightning_bolt"
-			},
-			{
-				"type":"origins:raycast",
-				"distance":10,
-				"block":false,
-				"entity":false,
-				"command_along_ray":"particle dust 1.000 0.918 0.369 1 ~ ~ ~ 0.1 0.1 0.1 5 5 normal",
-				"command_step":0.5
-			},
-			{
-				"type":"origins:execute_command",
-				"command":"tp @s ^ ^ ^10"
-			}
-		]
-	},
-	"condition": {
-		"type": "origins:in_block",
-		"block_condition": {
-			"type": "origins:or",
-			"inverted":true,
-			"conditions": [
+	"name": "Lightning Dash",
+	"description": "Lose corporeality for an instant and dash forward 5 blocks. Due to your physique it is rather easy to get stuck in the ground and you wont be able to dash while suffocating. You leave a thunderbolt where you originally were",
+	"type": "origins:multiple",
+	"active": {
+		"type": "origins:active_self",
+		"cooldown": 400,
+		"key": {
+			"key": "key.origins.secondary_active"
+		},
+		"hud_render": {
+			"should_render": true,
+			"bar_index": 13,
+			"sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_01.png"
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
 				{
-					"type": "origins:movement_blocking"
+					"type": "origins:raycast",
+					"distance": 10,
+					"block": false,
+					"entity": false,
+					"command_along_ray": "particle dust 1.000 0.918 0.369 1 ~ ~ ~ 0.1 0.1 0.1 5 5 normal",
+					"command_step": 0.5
 				},
 				{
-					"type": "origins:offset",
-					"condition": {
-						"type": "origins:movement_blocking"
-					},
-					"y": 1
+					"type": "origins:execute_command",
+					"command": "tp @s ^ ^ ^10"
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_timer",
+					"change": 20,
+					"operation": "set"
+				},
+				{
+					"type": "origins:spawn_entity",
+					"entity_type": "minecraft:lightning_bolt"
 				}
 			]
+		},
+		"condition": {
+			"type": "origins:in_block",
+			"block_condition": {
+				"type": "origins:or",
+				"inverted": true,
+				"conditions": [
+					{
+						"type": "origins:movement_blocking"
+					},
+					{
+						"type": "origins:offset",
+						"condition": {
+							"type": "origins:movement_blocking"
+						},
+						"y": 1
+					}
+				]
+			}
+		}
+	},
+	"immune_bolt": {
+		"type": "origins:invulnerability",
+		"damage_condition": {
+			"type": "origins:name",
+			"name": "lightningBolt"
+		},
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_timer",
+			"comparison": "!=",
+			"compare_to": "0"
+		}
+	},
+	"immune_fire": {
+		"type": "origins:fire_immunity",
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_timer",
+			"comparison": "!=",
+			"compare_to": "0"
+		}
+	},
+	"timer": {
+		"type": "origins:resource",
+		"min": 0,
+		"max": 20,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"while": {
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "*:*_timer",
+			"change": -1
 		}
 	}
 }
